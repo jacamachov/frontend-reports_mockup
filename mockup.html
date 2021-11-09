@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>FEBO - Health Report</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap-print.min.css" media="print" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <style>
+        .container {
+            max-width: 960px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <img src="assets/logohea.png" />
+            </div>
+            <div class="row mt-3 mb-3">
+                <div class="col-sm-6">
+                    <h4>Dates</h4>
+                    <input type="text" name="daterange" class="form-control" value="01/01/2018 - 01/15/2018" />
+                </div>
+                <div class="col-sm-6 d-flex align-items-center justify-content-end">
+                    <span class="fa fa-filter fa-2x"></span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h3>Medicine</h3>
+            </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Alendronate</td>
+                    <td>November 09, 2021</td>
+                    <td>Completed <span class="text-success fa fa-check-circle"></span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Alendronate</td>
+                    <td>November 10, 2021</td>
+                    <td>Skipped <span class="text-danger fa fa-times-circle"></span></td>
+                    <td>Headache</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Alendronate</td>
+                    <td>November 11, 2021</td>
+                    <td>Skipped <span class="text-danger fa fa-times-circle"></span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+            </table>
+            <div class="col-sm-4 mt-5">
+                <h3>Food</h3>
+            </div>
+            <div class="col-sm-12">
+                <canvas id="foodchart"></canvas>
+            </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Ingredients</th>
+                    <th scope="col">Tags</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Banana</td>
+                    <td></td>
+                    <td><span class="badge bg-warning ">Breakfast</span></td>
+                    <td>November 09, 2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Beef Burrito</td>
+                    <td>Corn, black beans, red onion, cheese</td>
+                    <td><span class="badge bg-warning ">Lunch</span> <span class="badge bg-warning ">Dinner</span></td>
+                    <td>November 10, 2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Milk & Cereal</td>
+                    <td>Milk, froot loops</td>
+                    <td><span class="badge bg-warning ">Breakfast</span> <span class="badge bg-warning ">Fast food</span></td>
+                    <td>November 11, 2021</td>
+                  </tr>
+                </tbody>
+            </table>
+            <div class="col-sm-4 mt-5">
+                <h3>Pee & Poo</h3>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <canvas id="peechart"></canvas>
+                </div>
+                <div class="col-sm-6">
+                    <canvas id="poochart"></canvas>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Tags</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Color 2</td>
+                    <td><span class="badge bg-warning ">Pee</span></td>
+                    <td>November 09, 2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Type 2</td>
+                    <td><span class="badge bg-black ">Poo</span></td>
+                    <td>November 10, 2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Color 3</td>
+                    <td><span class="badge bg-warning ">Pee</span></td>
+                    <td>November 11, 2021</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        $(function() {
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left'
+            }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            });
+        });
+        const labels = ['Calories', 'Calcium', 'Carbohydrates', 'Zinc', 'Cholesterol', 'Vitamin-c'];
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Nutrition Plan',
+                data: [65, 59, 80, 65, 59, 80],
+                backgroundColor: [
+                '#666CFF',
+                '#FF9999',
+                '#999DFF',
+                '#D8BF75',
+                '#EFD482',
+                '#BD8AE6',
+                ],
+                borderColor: [
+                '#666CFF',
+                '#FF9999',
+                '#999DFF',
+                '#D8BF75',
+                '#EFD482',
+                '#BD8AE6',
+                ],
+                borderWidth: 1
+            }]
+        };
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        };
+        const myChart = new Chart(
+            document.getElementById('foodchart'),
+            config
+        );
+
+        const data2 = {
+            labels: [
+                'Color 1',
+                'Color 2',
+                'Color 3',
+                'Color 4',
+                'Color 5',
+                'Color 6',
+                'Color 7',
+                'Color 8',
+            ],
+            datasets: [{
+                label: 'Pee',
+                data: [20, 30, 10, 10, 20, 30, 25, 30],
+                backgroundColor: [
+                    '#FDFBEE',
+                    '#FCF8D8',
+                    '#FAF2BA',
+                    '#F4E98D',
+                    '#ECD55C',
+                    '#EAC322',
+                    '#DAAD23',
+                    '#B99320',
+                ],
+                hoverOffset: 4
+            }]
+        };
+        const config2 = {
+            type: 'pie',
+            data: data2,
+        };
+        const myChart2 = new Chart(
+            document.getElementById('peechart'),
+            config2
+        );
+
+        const data3 = {
+            labels: [
+                'Type 1',
+                'Type 2',
+                'Type 3',
+            ],
+            datasets: [{
+                label: 'Poo',
+                data: [20, 30, 10],
+                backgroundColor: [
+                    '#964B00',
+                    '#C46200',
+                    '#F27900',
+                ],
+                hoverOffset: 4
+            }]
+        };
+        const config3 = {
+            type: 'pie',
+            data: data3,
+        };
+        const myChart3 = new Chart(
+            document.getElementById('poochart'),
+            config3
+        );
+    </script>
+</body>
+
+</html>
